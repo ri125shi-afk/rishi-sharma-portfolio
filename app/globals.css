@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Semantic color tokens (HSL triplets, no hsl() wrapper - Tailwind adds it
+ * at the class level) mapped from the approved navy/gold palette. Keeping
+ * these as variables, rather than hardcoding hex in components, is what
+ * lets shadcn/ui primitives inherit the brand automatically.
+ */
+@layer base {
+  :root {
+    --background: 210 20% 98%;         /* #F7F8FA page background */
+    --foreground: 220 45% 14%;         /* #16233F heading ink */
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 45% 14%;
+
+    --primary: 213 62% 12%;            /* #0B1B34 navy */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 216 20% 94%;          /* #EEF1F6 alt section bg */
+    --secondary-foreground: 220 45% 14%;
+
+    --muted: 216 20% 94%;
+    --muted-foreground: 220 12% 42%;   /* #5B667A body copy */
+
+    --accent: 39 65% 55%;              /* #D9A441 gold */
+    --accent-foreground: 220 45% 14%;
+
+    --border: 216 20% 88%;
+    --input: 216 20% 88%;
+    --ring: 39 65% 55%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Visible keyboard focus everywhere - WCAG 2.4.7 */
+  :focus-visible {
+    outline: 2px solid hsl(var(--accent));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Respect reduced-motion preference site-wide */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Skip-to-content link: visually hidden until focused */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground;
+  }
+}
