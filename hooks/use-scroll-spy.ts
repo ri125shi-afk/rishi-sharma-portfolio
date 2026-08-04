@@ -25,7 +25,7 @@ export function useScrollSpy(sectionIds: string[], offsetPx = 96) {
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
-        if (visible.length > 0) {
+        if (visible.length > 0 && visible[0]) {
           setActiveId(visible[0].target.id);
         }
       },
